@@ -9,7 +9,13 @@ export const useBoardStore = defineStore("Board", {
         totalElements: 0,
         totalPages: 0,
         hasNext: false,
-        hasPrevious: false
+        hasPrevious: false,
+        board: {
+            title: "",
+            content: "",
+            writer: "",
+            comments: []
+        }
     }),
 
     actions: {
@@ -31,6 +37,30 @@ export const useBoardStore = defineStore("Board", {
                 return response.data;
             } catch (error) {
                 console.error("게시글 목록 불러오기 실패:", error);
+                throw error;
+            }
+        },
+        async fetchBoardDetail(boardIdx) {
+            try {
+                const response = await axios.get(`/api/board/read/${boardIdx}`);
+                console.log("게시글 상세 불러오기 성공:", response.data);
+                this.board = response.data;
+            } catch (error) {
+                console.error("게시글 상세 불러오기 실패:", error);
+                throw error;
+            }
+        },
+
+        // 댓글 작성
+        async registerComment(boardIdx, commentData) {
+            try {
+                const response = await axios.post(`/api/comment/register/${boardIdx}`, commentData);
+                console.log("댓글 작성 성공:", response.data);
+                
+                // 댓글 목록 새로고침
+                this.fetchBoardDetail(boardIdx);
+            } catch (error) {
+                console.error("댓글 작성 실패:", error);
                 throw error;
             }
         }

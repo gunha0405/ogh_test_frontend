@@ -20,9 +20,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="board in boardStore.boardList" :key="board.idx">
+                <tr v-for="board in boardStore.boardList" :key="board.idx" @click="goToBoard(board.idx)" style="cursor: pointer;">
                     <td>{{ board.idx }}</td>
-                    <td>{{ board.title }}</td>
+                    <td>
+                        <router-link :to="`/board/read/${board.idx}`">{{ board.title }}</router-link>
+                    </td>
                     <td>{{ board.writer }}</td>
                     <td>{{ board.commentCount }}</td>
                 </tr>
@@ -34,6 +36,7 @@
 <script>
 import { onMounted } from "vue";
 import { useBoardStore } from "../stores/useBoardStore";
+import { useRouter } from "vue-router";
 
 export default {
     setup() {
@@ -58,10 +61,17 @@ export default {
             boardStore.fetchBoardList(0, 3);
         });
 
+        const router = useRouter();
+
+        const goToBoard = (boardIdx) => {
+            router.push(`/board/read/${boardIdx}`);
+        };
+
         return {
             boardStore,
             prevPage,
-            nextPage
+            nextPage,
+            goToBoard
         };
     }
 };

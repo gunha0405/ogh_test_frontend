@@ -1,5 +1,6 @@
 <script setup>
 import { RouterView } from 'vue-router';
+import BoardList from './components/BoardList.vue';
 
 
 </script>

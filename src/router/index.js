@@ -4,6 +4,7 @@ import BoardRead from '../components/BoardRead.vue';
 import BoardRegister from '../components/BoardRegister.vue';
 
 const routes = [
+    { path: "/", redirect: "/board/list" }, 
     {path : "/board/list", component : BoardList},
     {path : "/board/read/:boardIdx", component : BoardRead},
     {path : "/board/register", component : BoardRegister}

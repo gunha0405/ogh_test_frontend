@@ -8,7 +8,11 @@
             <span>페이지 {{ boardStore.page + 1 }} / {{ boardStore.totalPages }}</span>
             <button @click="nextPage" :disabled="!boardStore.hasNext">다음</button>
         </div>
-
+        <div class="button-area">
+            <router-link to="/board/register">
+                <button>글쓰기</button>
+            </router-link>
+        </div>
         <!-- 게시글 리스트 테이블 -->
         <table>
             <thead>
@@ -80,6 +84,15 @@ export default {
 
 
 <style>
+.button-area{
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+.button-area > button {
+    background-color: #03c75a;
+}
+
 .board-list {
     width: 800px;
     margin: 0 auto;

@@ -63,6 +63,16 @@ export const useBoardStore = defineStore("Board", {
                 console.error("댓글 작성 실패:", error);
                 throw error;
             }
+        },
+        async registerBoard(boardData) {
+            try {
+                const response = await axios.post("/api/board/register", boardData);
+                console.log("게시글 등록 성공:", response.data);
+                return response.data;
+            } catch (error) {
+                console.error("게시글 등록 실패:", error);
+                throw error;
+            }
         }
     }
 });

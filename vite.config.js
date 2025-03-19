@@ -8,7 +8,7 @@ export default defineConfig({
     proxy: {
       "/api": {
         //프록시 할 경로
-        target: "http://localhost:8080",
+        target: "http://192.168.28.224:8080",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/,""),
       }

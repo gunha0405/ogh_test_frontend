@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: ogh
+  name: frontend-deployment-blue
+spec:
+  selector:
+    matchLabels:
+      type: frontend
+      deployment: blue
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        type: frontend
+        deployment: blue
+    spec:
+      containers:
+        - name: frontend-blue
+          image: gunha0405/k8s_front:latest
+      terminationGracePeriodSeconds: 0

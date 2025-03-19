@@ -1,11 +1,13 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:18' // Node.js가 포함된 Docker 컨테이너 사용
+        }
+    }
 
     environment {
         IMAGE_NAME = 'gunha0405/k8s_front'
         IMAGE_TAG = "${BUILD_NUMBER}"
-        DEPLOY_SERVER = "test@192.0.2.7"  // 배포 서버 SSH 정보
-        DEPLOY_PATH = "/var/www/html/"  // Vue 빌드 결과를 배포할 경로
     }
 
     stages {
